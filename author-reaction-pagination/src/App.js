@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 const dummyPosts = new Array(15).fill(null).map((_, i) => ({
   id: i + 1,
   title: `Post Title ${i + 1}`,
-  content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+  content: `CSE (Computer Science and Engineering) is the study of computing technologies, covering programming, software development, algorithms, data structures, computer hardware, networks, cybersecurity, AI, and more. It focuses on designing and developing computer systems and solving real-world problems using technology.`,
   authorId: (i % 5) + 1,
-  authorName: `Author Name ${(i % 5) + 1}`,
+  authorName: `naima`,
   date: `${10 + (i % 20)} February 2025`,
   comments: [
     {
@@ -146,7 +146,7 @@ const Comment = ({ comment }) => {
 
 // Author Profile Component
 const AuthorProfile = ({ authorId, onBack }) => {
-  const author = `Author Name ${authorId}`;
+  const author = `Naima ${authorId}`;
   
   return (
     <div style={{ maxWidth: '768px', margin: '0 auto', padding: '24px' }}>
