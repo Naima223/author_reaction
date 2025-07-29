@@ -204,105 +204,7 @@ const AuthorProfile = ({ authorId, onBack }) => {
   );
 };
 
-// Pagination Component
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const getPageNumbers = () => {
-    const pages = [];
-    const maxVisible = 5;
-    
-    if (totalPages <= maxVisible) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) {
-          pages.push(i);
-        }
-        pages.push('...');
-        pages.push(totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(1);
-        pages.push('...');
-        for (let i = totalPages - 3; i <= totalPages; i++) {
-          pages.push(i);
-        }
-      } else {
-        pages.push(1);
-        pages.push('...');
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          pages.push(i);
-        }
-        pages.push('...');
-        pages.push(totalPages);
-      }
-    }
-    
-    return pages;
-  };
-
-  return (
-    <div style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      gap: '8px', 
-      marginTop: '32px' 
-    }}>
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        style={{
-          padding: '8px 12px',
-          border: '1px solid #e5e7eb',
-          borderRadius: '6px',
-          fontSize: '14px',
-          cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-          opacity: currentPage === 1 ? 0.5 : 1,
-          backgroundColor: '#f9fafb'
-        }}
-      >
-        Previous
-      </button>
-      
-      {getPageNumbers().map((page, index) => (
-        <button
-          key={index}
-          onClick={() => typeof page === 'number' ? onPageChange(page) : null}
-          disabled={page === '...'}
-          style={{
-            padding: '8px 12px',
-            border: '1px solid #e5e7eb',
-            borderRadius: '6px',
-            fontSize: '14px',
-            cursor: page === '...' ? 'default' : 'pointer',
-            backgroundColor: page === currentPage ? '#3b82f6' : '#ffffff',
-            color: page === currentPage ? 'white' : '#374151',
-            borderColor: page === currentPage ? '#3b82f6' : '#e5e7eb'
-          }}
-        >
-          {page}
-        </button>
-      ))}
-      
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        style={{
-          padding: '8px 12px',
-          border: '1px solid #e5e7eb',
-          borderRadius: '6px',
-          fontSize: '14px',
-          cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-          opacity: currentPage === totalPages ? 0.5 : 1,
-          backgroundColor: '#f9fafb'
-        }}
-      >
-        Next
-      </button>
-    </div>
-  );
-};
+// Pagination removed
 
 // Main Post Component
 const BlogPost = ({ post, onAuthorClick }) => {
@@ -404,16 +306,12 @@ const BlogPost = ({ post, onAuthorClick }) => {
 
 // Main App Component
 const App = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [currentView, setCurrentView] = useState('posts'); // 'posts' or 'author'
   const [selectedAuthorId, setSelectedAuthorId] = useState(null);
   
-  const postsPerPage = 1; // Show one post per page for simplicity
-  const totalPages = Math.ceil(dummyPosts.length / postsPerPage);
-  
+  // Show just the first post
   const getCurrentPost = () => {
-    const startIndex = (currentPage - 1) * postsPerPage;
-    return dummyPosts[startIndex];
+    return dummyPosts[0];
   };
 
   const handleAuthorClick = (authorId) => {
@@ -443,12 +341,6 @@ const App = () => {
         <BlogPost 
           post={getCurrentPost()} 
           onAuthorClick={handleAuthorClick}
-        />
-        
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
         />
       </div>
     </div>

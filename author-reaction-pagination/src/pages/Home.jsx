@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import Post from '../components/Post';
-import Pagination from '../components/Pagination';
+//import Pagination from '../components/Pagination';
 
 // Extended dummy data with comments
 const dummyPosts = new Array(15).fill(null).map((_, i) => ({
@@ -52,11 +52,7 @@ const Home = ({ onAuthorClick }) => {
           onAuthorClick={onAuthorClick}
         />
         
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+        
       </div>
     </div>
   );
