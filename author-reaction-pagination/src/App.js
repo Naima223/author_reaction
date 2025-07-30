@@ -200,11 +200,10 @@ const AuthorProfile = ({ authorId, onBack }) => {
           </span>
         </div>
         <h2 style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '8px' }}>{author}</h2>
-        <p style={{ color: '#6b7280', marginBottom: '16px' }}>Professional Writer & Content Creator</p>
+        <p style={{ color: '#6b7280', marginBottom: '16px' }}>Student of AUST CSE</p>
         <div style={{ backgroundColor: '#f9fafb', padding: '24px', borderRadius: '8px' }}>
           <p style={{ color: '#374151' }}>
-            Welcome to the profile of <strong>{author}</strong>. This is a minimal author profile page 
-            to demonstrate routing functionality in the blog application.
+            Welcome to the profile of <strong>{author}</strong>. Passionate learner exploring technology and new innovations.
           </p>
           <div style={{ 
             marginTop: '16px', 
@@ -215,7 +214,7 @@ const AuthorProfile = ({ authorId, onBack }) => {
             color: '#6b7280' 
           }}>
             <span>📝 25 Posts</span>
-            <span>👥 1.2k Followers</span>
+           
             <span>📅 Joined Feb 2023</span>
           </div>
         </div>
