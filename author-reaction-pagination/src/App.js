@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 const dummyPosts = new Array(15).fill(null).map((_, i) => ({
   id: i + 1,
   title: `Post Title ${i + 1}`,
-  content: `CSE (Computer Science and Engineering) is the study of computing technologies, covering programming, software development, algorithms, data structures, computer hardware, networks, cybersecurity, AI, and more. It focuses on designing and developing computer systems and solving real-world problems using technology.`,
+  content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
   authorId: (i % 5) + 1,
-  authorName: `naima`,
+  authorName: `Author Name ${(i % 5) + 1}`,
   date: `${10 + (i % 20)} February 2025`,
   comments: [
     {
@@ -146,7 +146,7 @@ const Comment = ({ comment }) => {
 
 // Author Profile Component
 const AuthorProfile = ({ authorId, onBack }) => {
-  const author = `Naima ${authorId}`;
+  const author = `Author Name ${authorId}`;
   
   return (
     <div style={{ maxWidth: '768px', margin: '0 auto', padding: '24px' }}>
@@ -204,7 +204,105 @@ const AuthorProfile = ({ authorId, onBack }) => {
   );
 };
 
-// Pagination removed
+// Pagination Component
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisible = 5;
+    
+    if (totalPages <= maxVisible) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push('...');
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push('...');
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1);
+        pages.push('...');
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push('...');
+        pages.push(totalPages);
+      }
+    }
+    
+    return pages;
+  };
+
+  return (
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      gap: '8px', 
+      marginTop: '32px' 
+    }}>
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        style={{
+          padding: '8px 12px',
+          border: '1px solid #e5e7eb',
+          borderRadius: '6px',
+          fontSize: '14px',
+          cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+          opacity: currentPage === 1 ? 0.5 : 1,
+          backgroundColor: '#f9fafb'
+        }}
+      >
+        Previous
+      </button>
+      
+      {getPageNumbers().map((page, index) => (
+        <button
+          key={index}
+          onClick={() => typeof page === 'number' ? onPageChange(page) : null}
+          disabled={page === '...'}
+          style={{
+            padding: '8px 12px',
+            border: '1px solid #e5e7eb',
+            borderRadius: '6px',
+            fontSize: '14px',
+            cursor: page === '...' ? 'default' : 'pointer',
+            backgroundColor: page === currentPage ? '#3b82f6' : '#ffffff',
+            color: page === currentPage ? 'white' : '#374151',
+            borderColor: page === currentPage ? '#3b82f6' : '#e5e7eb'
+          }}
+        >
+          {page}
+        </button>
+      ))}
+      
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        style={{
+          padding: '8px 12px',
+          border: '1px solid #e5e7eb',
+          borderRadius: '6px',
+          fontSize: '14px',
+          cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+          opacity: currentPage === totalPages ? 0.5 : 1,
+          backgroundColor: '#f9fafb'
+        }}
+      >
+        Next
+      </button>
+    </div>
+  );
+};
 
 // Main Post Component
 const BlogPost = ({ post, onAuthorClick }) => {
@@ -306,12 +404,16 @@ const BlogPost = ({ post, onAuthorClick }) => {
 
 // Main App Component
 const App = () => {
+  const [currentPage, setCurrentPage] = useState(1);
   const [currentView, setCurrentView] = useState('posts'); // 'posts' or 'author'
   const [selectedAuthorId, setSelectedAuthorId] = useState(null);
   
-  // Show just the first post
+  const postsPerPage = 1; // Show one post per page for simplicity
+  const totalPages = Math.ceil(dummyPosts.length / postsPerPage);
+  
   const getCurrentPost = () => {
-    return dummyPosts[0];
+    const startIndex = (currentPage - 1) * postsPerPage;
+    return dummyPosts[startIndex];
   };
 
   const handleAuthorClick = (authorId) => {
@@ -341,6 +443,12 @@ const App = () => {
         <BlogPost 
           post={getCurrentPost()} 
           onAuthorClick={handleAuthorClick}
+        />
+        
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
         />
       </div>
     </div>
