@@ -4,23 +4,25 @@ import React, { useState } from 'react';
 // Dummy data for posts
 const dummyPosts = new Array(15).fill(null).map((_, i) => ({
   id: i + 1,
-  title: `Post Title ${i + 1}`,
-  content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+  title: `CSE2200`,
+  content: `Computer Science and Engineering (CSE) focuses on the study of computer systems, software, and hardware.
+              It involves programming, algorithms, networks, and artificial intelligence.
+              CSE professionals design and develop innovative solutions for real-world technological problems.`,
   authorId: (i % 5) + 1,
-  authorName: `Author Name ${(i % 5) + 1}`,
+  authorName: `Naima Sultana ${(i % 5) + 1}`,
   date: `${10 + (i % 20)} February 2025`,
   comments: [
     {
       id: 1,
       author: `Commenter ${(i % 3) + 1}`,
       date: `${12 + (i % 15)} February 2025`,
-      content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
+      content: `CSE is the backbone of modern technology and innovation.`
     },
     {
       id: 2,
       author: `Commenter ${(i % 3) + 2}`,
       date: `${13 + (i % 10)} February 2025`,
-      content: `Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`
+      content: `It is a field that shapes the future through coding and creativity.`
     }
   ]
 }));
@@ -146,7 +148,7 @@ const Comment = ({ comment }) => {
 
 // Author Profile Component
 const AuthorProfile = ({ authorId, onBack }) => {
-  const author = `Author Name ${authorId}`;
+  const author = `Naima ${authorId}`;
   
   return (
     <div style={{ maxWidth: '768px', margin: '0 auto', padding: '24px' }}>
