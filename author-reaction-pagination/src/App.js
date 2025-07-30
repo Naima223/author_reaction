@@ -9,19 +9,19 @@ const dummyPosts = new Array(15).fill(null).map((_, i) => ({
               It involves programming, algorithms, networks, and artificial intelligence.
               CSE professionals design and develop innovative solutions for real-world technological problems.`,
   authorId: (i % 5) + 1,
-  authorName: `Naima Sultana ${(i % 5) + 1}`,
-  date: `${10 + (i % 20)} February 2025`,
+  authorName: `Naima Sultana`,
+  date: `25 july 2025`,
   comments: [
     {
       id: 1,
       author: `Commenter ${(i % 3) + 1}`,
-      date: `${12 + (i % 15)} February 2025`,
+      date: `25 july 2025`,
       content: `CSE is the backbone of modern technology and innovation.`
     },
     {
       id: 2,
       author: `Commenter ${(i % 3) + 2}`,
-      date: `${13 + (i % 10)} February 2025`,
+      date: `30 july 2025`,
       content: `It is a field that shapes the future through coding and creativity.`
     }
   ]
